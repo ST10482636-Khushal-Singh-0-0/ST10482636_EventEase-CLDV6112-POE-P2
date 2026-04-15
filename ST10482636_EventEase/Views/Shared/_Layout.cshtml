@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventEase — @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div class="container header-grid">
+            <a asp-controller="Home" asp-action="Index" class="logo">
+                <strong>EVENT</strong>EASE
+            </a>
+
+            <nav class="nav-links">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-controller="Venues" asp-action="Index">Venues</a>
+                <a asp-controller="Events" asp-action="Index">Events</a>
+                <a asp-controller="Bookings" asp-action="Index">Bookings</a>
+            </nav>
+
+            <div class="header-spacer"></div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="fixed-footer">
+        <div class="container footer-grid">
+            <div class="footer-info">
+                Khushal Singh <strong>ST10482636</strong>
+            </div>
+
+            <nav class="footer-links">
+                <a asp-controller="Venues" asp-action="Index">Venues</a>
+                <a asp-controller="Events" asp-action="Index">Events</a>
+                <a asp-controller="Bookings" asp-action="Index">Bookings</a>
+            </nav>
+
+            <div class="footer-tag">
+                @DateTime.Now.Year — VC, Emeris
+            </div>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

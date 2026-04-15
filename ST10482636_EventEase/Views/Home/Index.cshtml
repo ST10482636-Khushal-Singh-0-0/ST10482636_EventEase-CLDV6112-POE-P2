@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<section class="hero">
+    <h1>Manage your space with ease.</h1>
+    <p style="color: #636e72; margin-bottom: 2rem;">
+        The official admin platform for EventEase venue scheduling and bookings.
+    </p>
+    <div>
+        <a asp-controller="Venues" asp-action="Index" class="btn-minimal">Browse Venues</a>
+        <a asp-controller="Bookings" asp-action="Index" class="btn-minimal" style="margin-left:10px;">View Schedule</a>
+    </div>
+</section>
