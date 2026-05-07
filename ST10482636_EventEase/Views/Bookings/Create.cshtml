@@ -1,41 +1,47 @@
 ﻿@model ST10482636_EventEase.Models.Booking
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Make a Booking";
 }
 
-<h1>Create</h1>
+<div class="action-header">
+    <h1>Make a Booking</h1>
+    <p style="color: #636e72; font-size: 1.1rem;">Secure a premium venue for your upcoming event.</p>
+</div>
 
-<h4>Booking</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="container" style="max-width: 650px; margin-bottom: 5rem;">
+    <div style="background-color: var(--bg); border: 1px solid var(--light-gray); border-radius: 4px; padding: 3rem; box-shadow: 0 8px 24px rgba(0,0,0,0.04);">
+
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="VenueId" class="control-label"></label>
-                <select asp-for="VenueId" class ="form-control" asp-items="ViewBag.VenueId"></select>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group mb-4">
+                <label asp-for="VenueId" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Select Venue</label>
+                <select asp-for="VenueId" class="form-control" asp-items="ViewBag.VenueId" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px; cursor: pointer;"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="EventId" class="control-label"></label>
-                <select asp-for="EventId" class ="form-control" asp-items="ViewBag.EventId"></select>
+
+            <div class="form-group mb-4">
+                <label asp-for="EventId" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Select Event</label>
+                <select asp-for="EventId" class="form-control" asp-items="ViewBag.EventId" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px; cursor: pointer;"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="BookingDate" class="control-label"></label>
-                <input asp-for="BookingDate" class="form-control" />
+
+            <div class="form-group mb-5">
+                <label asp-for="BookingDate" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Date & Time of Booking</label>
+                <input asp-for="BookingDate" class="form-control" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px;" />
                 <span asp-validation-for="BookingDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="form-group d-flex justify-content-between align-items-center pt-3" style="border-top: 1px solid var(--light-gray);">
+                <a asp-action="Index" class="btn-minimal" style="border-color: #b2bec3; color: #636e72;">Back to List</a>
+                <input type="submit" value="Confirm Booking" class="btn-cta" style="margin: 0; padding: 0.8rem 2.5rem;" />
             </div>
         </form>
+
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

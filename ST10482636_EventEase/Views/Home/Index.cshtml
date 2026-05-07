@@ -1,14 +1,58 @@
-﻿@{
-    ViewData["Title"] = "Welcome";
+﻿@model IEnumerable<ST10482636_EventEase.Models.Venue>
+
+@{
+    ViewData["Title"] = "Home Page";
 }
 
-<section class="hero">
-    <h1>Manage your space with ease.</h1>
-    <p style="color: #636e72; margin-bottom: 2rem;">
-        The official admin platform for EventEase venue scheduling and bookings.
-    </p>
-    <div>
-        <a asp-controller="Venues" asp-action="Index" class="btn-minimal">Browse Venues</a>
-        <a asp-controller="Bookings" asp-action="Index" class="btn-minimal" style="margin-left:10px;">View Schedule</a>
+<div class="hero-banner">
+    <h1 class="hero-title">Find Your Perfect Space</h1>
+    <p class="hero-subtitle">Discover and book premium venues for your next unforgettable event.</p>
+
+    <div class="hero-buttons">
+        <a asp-controller="Venues" asp-action="Index" class="btn-hero-minimal">Browse Venues</a>
+        <a asp-controller="Bookings" asp-action="Index" class="btn-hero-minimal">View Bookings</a>
     </div>
-</section>
+</div>
+
+<div class="section-featured">
+    <h2 class="section-title">Featured Venues</h2>
+
+    <div class="venue-grid">
+        @foreach (var item in Model)
+        {
+            <div class="venue-card">
+                <div class="venue-card-img-container">
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="@item.Name" class="venue-card-img" />
+                    }
+                    else
+                    {
+                        <span class="venue-no-img">No Image</span>
+                    }
+                </div>
+                <div class="venue-card-body">
+                    <h3 class="venue-card-title">@item.Name</h3>
+                    <div class="venue-card-details">
+                        <strong>Location:</strong> @item.Location <br />
+                        <strong>Capacity:</strong> @item.Capacity guests
+                    </div>
+
+                    <div class="venue-card-actions">
+                        <a asp-controller="Venues" asp-action="Details" asp-route-id="@item.VenueId" class="btn-card-action">Details</a>
+                        <a asp-controller="Bookings" asp-action="Create" class="btn-card-action" style="color: var(--accent);">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div style="text-align: center; margin-top: 3.5rem;">
+        <a asp-controller="Venues" asp-action="Index" class="btn-minimal">View All Venues</a>
+    </div>
+</div>
+
+<div class="cta-footer">
+    <h2>Ready to plan your next big moment?</h2>
+    <a asp-controller="Bookings" asp-action="Create" class="btn-cta">Make a Booking</a>
+</div>

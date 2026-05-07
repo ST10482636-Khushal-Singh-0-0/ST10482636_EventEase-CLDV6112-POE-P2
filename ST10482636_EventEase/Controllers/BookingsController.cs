@@ -27,10 +27,11 @@ namespace ST10482636_EventEase.Controllers
                 .Include(b => b.Venue)
                 .AsQueryable();
 
+            // If the user typed something, search by Booking ID OR Event Name
             if (!string.IsNullOrEmpty(searchString))
             {
                 bookings = bookings.Where(b =>
-                    (b.Venue != null && b.Venue.Name.Contains(searchString)) ||
+                    b.BookingId.ToString() == searchString ||
                     (b.Event != null && b.Event.EventName.Contains(searchString)));
             }
 

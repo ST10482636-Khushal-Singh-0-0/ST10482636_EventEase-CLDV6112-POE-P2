@@ -1,4 +1,3 @@
-/* EventEase Minimalist Theme Variables */
 :root {
     --primary: #2d3436;
     --accent: #0984e3;
@@ -12,11 +11,12 @@ body {
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.6;
-    /* Added padding so content isn't hidden behind the fixed footer */
-    padding-bottom: 120px;
+    padding-bottom: 120px; /* Padding for fixed footer */
 }
 
-/* Header Grid Logic for Centering */
+/* =========================================
+   1. Layout & Header 
+========================================= */
 header {
     padding: 2.5rem 0;
     border-bottom: 1px solid var(--light-gray);
@@ -28,7 +28,6 @@ header {
     align-items: center;
 }
 
-/* Logo Styling (Bold and Unbold) */
 .logo {
     flex: 1;
     color: var(--text);
@@ -42,7 +41,6 @@ header {
         color: var(--accent);
     }
 
-/* Centered and Spaced Navigation */
 .nav-links {
     flex: 3;
     display: flex;
@@ -68,13 +66,15 @@ header {
         color: var(--accent);
     }
 
-/* Container and Utility */
 .container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
+/* =========================================
+   2. Shared Buttons & Forms 
+========================================= */
 .btn-minimal {
     padding: 0.8rem 1.8rem;
     border: 1.5px solid var(--primary);
@@ -94,7 +94,33 @@ header {
         color: white;
     }
 
-/* --- Index Page Enhancements --- */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.search-input {
+    padding: 0.8rem 1rem;
+    border: 1.5px solid var(--light-gray);
+    background-color: var(--bg);
+    color: var(--text);
+    width: 300px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+    }
+
+/* =========================================
+   3. Tables (For Bookings Dashboard)
+========================================= */
 .action-header {
     text-align: center;
     padding: 3rem 0;
@@ -148,7 +174,228 @@ header {
             color: var(--accent);
         }
 
-/* --- FIXED FOOTER STYLES --- */
+/* =========================================
+   4. Venue & Event Card Grids 
+========================================= */
+.venue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.venue-card {
+    background-color: var(--bg);
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+    .venue-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+        border-color: var(--primary);
+    }
+
+.venue-card-img-container {
+    height: 220px;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--light-gray);
+    overflow: hidden;
+}
+
+.venue-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.venue-card:hover .venue-card-img {
+    transform: scale(1.05);
+}
+
+.venue-no-img {
+    color: #b2bec3;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.venue-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.venue-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.venue-card-details {
+    font-size: 0.9rem;
+    color: #636e72;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    line-height: 1.8;
+}
+
+    .venue-card-details strong {
+        color: var(--text);
+    }
+
+.venue-card-actions {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--light-gray);
+    padding-top: 1rem;
+}
+
+.btn-card-action {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+    .btn-card-action:hover {
+        color: var(--accent);
+    }
+
+/* =========================================
+   5. Home Page: Hero Banner 
+========================================= */
+.hero-banner {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1572635196085-fb0ec24a8644?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-top: -2.5rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    color: #dfe6e9;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.btn-hero-minimal {
+    padding: 0.8rem 1.8rem;
+    border: 1.5px solid #ffffff;
+    background: none;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+    .btn-hero-minimal:hover {
+        background: #ffffff;
+        color: var(--primary);
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    }
+
+/* =========================================
+   6. Home Page: Featured & CTA Footer 
+========================================= */
+.section-featured {
+    padding: 4rem 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 2rem;
+}
+
+.cta-footer {
+    background-color: rgb(67, 0, 8);
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+    margin-top: 4rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+    .cta-footer h2 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 2.5rem;
+        letter-spacing: 1px;
+    }
+
+.btn-cta {
+    background-color: #000000; /* Solid white background ffffff */
+    color: #ffffff; /* Black text */
+    padding: 1.2rem 3.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+    .btn-cta:hover {
+        background-color: #ffffff; /* Turns black on hover 000000 */
+        color: #000000; /* Text turns white on hover */
+        transform: translateY(-4px);
+    }
+
+/* =========================================
+   7. Fixed Global Footer (Bottom of page)
+========================================= */
 .fixed-footer {
     position: fixed;
     bottom: 0;
@@ -157,7 +404,7 @@ header {
     padding: 2rem 0;
     border-top: 1px solid var(--light-gray);
     background-color: var(--bg);
-    z-index: 1000; /* Keeps it above other elements */
+    z-index: 1000;
 }
 
 .footer-grid {
@@ -194,7 +441,6 @@ header {
     color: #b2bec3;
 }
 
-/* Fix for mobile screens */
 @media (max-width: 768px) {
     .footer-grid {
         flex-direction: column;

@@ -1,53 +1,53 @@
 ﻿@model IEnumerable<ST10482636_EventEase.Models.Booking>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bookings Dashboard";
 }
-
-<h1>Index</h1>
 
 <div class="action-header">
     <h1>Venue Bookings</h1>
     <p>
         <a asp-action="Create" class="btn-minimal">Make New Booking</a>
     </p>
+
+    <form asp-action="Index" method="get" class="search-container">
+        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="search-input" placeholder="Search by venue or event name..." />
+        <button type="submit" class="btn-minimal">SEARCH</button>
+    </form>
 </div>
 
-<table class="table-minimal">
-</table>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Venue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Venue.VenueId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.EventId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="venue-grid">
+    @foreach (var item in Model)
+    {
+        <div class="venue-card">
+
+            <div class="venue-card-img-container" style="height: 160px;">
+                @if (item.Venue != null && !string.IsNullOrEmpty(item.Venue.ImageUrl))
+                {
+                    <img src="@item.Venue.ImageUrl" alt="Venue" class="venue-card-img" />
+                }
+                else
+                {
+                    <span class="venue-no-img">Booking Details</span>
+                }
+            </div>
+
+            <div class="venue-card-body">
+                <h3 class="venue-card-title">@(item.Event != null ? item.Event.EventName : "N/A")</h3>
+
+                <div class="venue-card-details">
+                    <strong>When:</strong> @item.BookingDate.ToString("dd MMM yyyy, HH:mm") <br />
+                    <strong>Where:</strong> @(item.Venue != null ? item.Venue.Name : "N/A") <br />
+                    <strong>Location:</strong> @(item.Venue != null ? item.Venue.Location : "N/A")
+                </div>
+
+                <div class="venue-card-actions">
+                    <a asp-action="Edit" asp-route-id="@item.BookingId" class="btn-card-action">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.BookingId" class="btn-card-action">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.BookingId" class="btn-card-action" style="color: #d63031;">Cancel</a>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
