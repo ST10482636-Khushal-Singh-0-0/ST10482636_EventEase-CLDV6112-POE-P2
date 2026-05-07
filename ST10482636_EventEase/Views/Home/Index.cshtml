@@ -40,14 +40,14 @@
 
                     <div class="venue-card-actions">
                         <a asp-controller="Venues" asp-action="Details" asp-route-id="@item.VenueId" class="btn-card-action">Details</a>
-                        <a asp-controller="Bookings" asp-action="Create" class="btn-card-action" style="color: var(--accent);">Book Now</a>
+                        <a asp-controller="Bookings" asp-action="Create" class="btn-card-action text-accent">Book Now</a>
                     </div>
                 </div>
             </div>
         }
     </div>
 
-    <div style="text-align: center; margin-top: 3.5rem;">
+    <div class="view-all-container">
         <a asp-controller="Venues" asp-action="Index" class="btn-minimal">View All Venues</a>
     </div>
 </div>

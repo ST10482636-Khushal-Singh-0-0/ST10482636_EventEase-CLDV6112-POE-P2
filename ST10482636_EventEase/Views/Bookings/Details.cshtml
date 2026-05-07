@@ -1,36 +1,42 @@
 ﻿@model ST10482636_EventEase.Models.Booking
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Booking Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Booking</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Venue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Venue.VenueId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Event)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Event.EventId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookingDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookingDate)
-        </dd>
-    </dl>
+<div class="action-header">
+    <h1>Booking Details</h1>
+    <p class="action-subtitle">Review your secured reservation.</p>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.BookingId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="container form-card-container">
+    <div class="form-card form-card-image-layout">
+
+        @if (Model.Venue != null && !string.IsNullOrEmpty(Model.Venue.ImageUrl))
+        {
+            <div class="form-card-image-wrapper">
+                <img src="@Model.Venue.ImageUrl" alt="Venue" class="form-card-image" />
+            </div>
+        }
+
+        <div class="form-card-body">
+            <h3 class="card-title-display">@(Model.Event != null ? Model.Event.EventName : "N/A")</h3>
+
+            <dl class="row dl-layout">
+                <dt class="col-sm-4 dt-label">Booking Date</dt>
+                <dd class="col-sm-8">@Model.BookingDate.ToString("dd MMM yyyy, HH:mm")</dd>
+
+                <dt class="col-sm-4 dt-label">Venue</dt>
+                <dd class="col-sm-8">@(Model.Venue != null ? Model.Venue.Name : "N/A")</dd>
+
+                <dt class="col-sm-4 dt-label">Location</dt>
+                <dd class="col-sm-8">@(Model.Venue != null ? Model.Venue.Location : "N/A")</dd>
+            </dl>
+
+            <div class="form-actions">
+                <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
+                <a asp-action="Edit" asp-route-id="@Model.BookingId" class="btn-cta btn-submit">Edit Booking</a>
+            </div>
+        </div>
+    </div>
 </div>

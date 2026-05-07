@@ -20,7 +20,6 @@
     @foreach (var item in Model)
     {
         <div class="venue-card">
-
             <div class="venue-card-body">
                 <h3 class="venue-card-title">@item.EventName</h3>
 
@@ -35,7 +34,6 @@
                     <a asp-action="Delete" asp-route-id="@item.EventId" class="btn-card-action">Delete</a>
                 </div>
             </div>
-
         </div>
     }
 </div>

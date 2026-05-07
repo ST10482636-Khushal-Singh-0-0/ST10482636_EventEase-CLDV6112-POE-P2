@@ -6,34 +6,33 @@
 
 <div class="action-header">
     <h1>Delete Event</h1>
-    <p style="color: #d63031; font-size: 1.1rem;">Are you sure you want to delete this event?</p>
+    <p class="action-subtitle-danger">Are you sure you want to delete this event?</p>
 </div>
 
-<div class="container" style="max-width: 650px; margin-bottom: 5rem;">
+<div class="container form-card-container">
 
     @if (TempData["ErrorMessage"] != null)
     {
-        <div style="background-color: #ffeaa7; color: #d63031; border: 1px solid #d63031; padding: 1rem; border-radius: 4px; margin-bottom: 2rem; text-align: center; font-weight: 600;">
+        <div class="alert-banner">
             ⚠️ @TempData["ErrorMessage"]
         </div>
     }
 
-    <div style="background-color: var(--bg); border: 1px solid var(--light-gray); border-radius: 4px; padding: 3rem; box-shadow: 0 8px 24px rgba(0,0,0,0.04);">
+    <div class="form-card">
+        <h3 class="card-title-display">@Model.EventName</h3>
 
-        <h3 style="margin-bottom: 1.5rem; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 1px;">@Model.EventName</h3>
-
-        <dl class="row" style="line-height: 2;">
-            <dt class="col-sm-4" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Date</dt>
+        <dl class="row dl-layout">
+            <dt class="col-sm-4 dt-label">Date</dt>
             <dd class="col-sm-8">@Model.EventDate.ToString("dd MMM yyyy, HH:mm")</dd>
 
-            <dt class="col-sm-4" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Description</dt>
+            <dt class="col-sm-4 dt-label">Description</dt>
             <dd class="col-sm-8">@Model.Description</dd>
         </dl>
 
-        <form asp-action="Delete" class="mt-4 pt-3" style="border-top: 1px solid var(--light-gray); display: flex; justify-content: space-between; align-items: center;">
+        <form asp-action="Delete" class="form-actions">
             <input type="hidden" asp-for="EventId" />
-            <a asp-action="Index" class="btn-minimal" style="border-color: #b2bec3; color: #636e72;">Cancel</a>
-            <input type="submit" value="Delete Permanently" class="btn-cta" style="background-color: #d63031; color: white; padding: 0.8rem 2.5rem;" />
+            <a asp-action="Index" class="btn-minimal btn-back">Cancel</a>
+            <input type="submit" value="Delete Permanently" class="btn-danger-submit" />
         </form>
     </div>
 </div>

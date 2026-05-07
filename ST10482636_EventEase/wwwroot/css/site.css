@@ -11,7 +11,7 @@ body {
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.6;
-    padding-bottom: 120px; /* Padding for fixed footer */
+    padding-bottom: 120px;
 }
 
 /* =========================================
@@ -374,8 +374,8 @@ header {
     }
 
 .btn-cta {
-    background-color: #000000; /* Solid white background ffffff */
-    color: #ffffff; /* Black text */
+    background-color: #000000;
+    color: #ffffff;
     padding: 1.2rem 3.5rem;
     font-size: 1.1rem;
     font-weight: 600;
@@ -388,8 +388,8 @@ header {
 }
 
     .btn-cta:hover {
-        background-color: #ffffff; /* Turns black on hover 000000 */
-        color: #000000; /* Text turns white on hover */
+        background-color: #ffffff;
+        color: #000000;
         transform: translateY(-4px);
     }
 
@@ -451,4 +451,154 @@ header {
     body {
         padding-bottom: 180px;
     }
+}
+
+/* =========================================
+   8. Forms & Details Cards (Extracted Inline CSS)
+========================================= */
+.action-subtitle {
+    color: #636e72;
+    font-size: 1.1rem;
+}
+
+.action-subtitle-danger {
+    color: #d63031;
+    font-size: 1.1rem;
+}
+
+.form-card-container {
+    max-width: 650px;
+    margin: 0 auto 5rem auto;
+}
+
+.form-card {
+    background-color: var(--bg);
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    padding: 3rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.form-card-image-layout {
+    padding: 0;
+    overflow: hidden;
+}
+
+.form-card-image-wrapper {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background-color: var(--light-gray);
+}
+
+.form-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form-card-body {
+    padding: 3rem;
+}
+
+.custom-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.custom-input {
+    padding: 0.8rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-file-input {
+    padding: 0.5rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-actions {
+    border-top: 1px solid var(--light-gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.btn-back {
+    border-color: #b2bec3;
+    color: #636e72;
+}
+
+.btn-submit {
+    margin: 0;
+    padding: 0.8rem 2.5rem;
+}
+
+.alert-banner {
+    background-color: #ffeaa7;
+    color: #d63031;
+    border: 1px solid #d63031;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.card-title-display {
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.dl-layout {
+    line-height: 2;
+    margin-bottom: 0;
+}
+
+.dt-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.btn-danger-submit {
+    background-color: #d63031;
+    color: white;
+    padding: 0.8rem 2.5rem;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn-danger-submit:hover {
+        background-color: #b02a2a;
+    }
+
+/* Helper Utilities */
+.text-accent {
+    color: var(--accent) !important;
+}
+
+.view-all-container {
+    text-align: center;
+    margin-top: 3.5rem;
 }

@@ -6,25 +6,24 @@
 
 <div class="action-header">
     <h1>Event Details</h1>
-    <p style="color: #636e72; font-size: 1.1rem;">Review the scheduled event information.</p>
+    <p class="action-subtitle">Review the scheduled event information.</p>
 </div>
 
-<div class="container" style="max-width: 650px; margin-bottom: 5rem;">
-    <div style="background-color: var(--bg); border: 1px solid var(--light-gray); border-radius: 4px; padding: 3rem; box-shadow: 0 8px 24px rgba(0,0,0,0.04);">
+<div class="container form-card-container">
+    <div class="form-card">
+        <h3 class="card-title-display">@Model.EventName</h3>
 
-        <h3 style="margin-bottom: 1.5rem; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 1px;">@Model.EventName</h3>
-
-        <dl class="row" style="line-height: 2;">
-            <dt class="col-sm-4" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Date & Time</dt>
+        <dl class="row dl-layout">
+            <dt class="col-sm-4 dt-label">Date & Time</dt>
             <dd class="col-sm-8">@Model.EventDate.ToString("dd MMM yyyy, HH:mm")</dd>
 
-            <dt class="col-sm-4" style="font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Description</dt>
+            <dt class="col-sm-4 dt-label">Description</dt>
             <dd class="col-sm-8">@Model.Description</dd>
         </dl>
 
-        <div class="mt-4 pt-3" style="border-top: 1px solid var(--light-gray); display: flex; justify-content: space-between; align-items: center;">
-            <a asp-action="Index" class="btn-minimal" style="border-color: #b2bec3; color: #636e72;">Back to List</a>
-            <a asp-action="Edit" asp-route-id="@Model.EventId" class="btn-cta" style="padding: 0.8rem 2.5rem;">Edit Event</a>
+        <div class="form-actions">
+            <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
+            <a asp-action="Edit" asp-route-id="@Model.EventId" class="btn-cta btn-submit">Edit Event</a>
         </div>
     </div>
 </div>

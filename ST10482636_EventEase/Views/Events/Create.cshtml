@@ -6,36 +6,36 @@
 
 <div class="action-header">
     <h1>Create New Event</h1>
-    <p style="color: #636e72; font-size: 1.1rem;">Fill in the details below to schedule your next event.</p>
+    <p class="action-subtitle">Fill in the details below to schedule your next event.</p>
 </div>
 
-<div class="container" style="max-width: 650px; margin-bottom: 5rem;">
-    <div style="background-color: var(--bg); border: 1px solid var(--light-gray); border-radius: 4px; padding: 3rem; box-shadow: 0 8px 24px rgba(0,0,0,0.04);">
+<div class="container form-card-container">
+    <div class="form-card">
 
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
             <div class="form-group mb-4">
-                <label asp-for="EventName" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;"></label>
-                <input asp-for="EventName" class="form-control" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px;" placeholder="e.g., Summer Music Festival" />
+                <label asp-for="EventName" class="control-label custom-label"></label>
+                <input asp-for="EventName" class="form-control custom-input" placeholder="e.g., Summer Music Festival" />
                 <span asp-validation-for="EventName" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-4">
-                <label asp-for="Description" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;"></label>
-                <textarea asp-for="Description" class="form-control" rows="3" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px;" placeholder="Describe what the event is about..."></textarea>
+                <label asp-for="Description" class="control-label custom-label"></label>
+                <textarea asp-for="Description" class="form-control custom-input" rows="3" placeholder="Describe what the event is about..."></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-5">
-                <label asp-for="EventDate" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;"></label>
-                <input asp-for="EventDate" class="form-control" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px;" />
+                <label asp-for="EventDate" class="control-label custom-label"></label>
+                <input asp-for="EventDate" class="form-control custom-input" />
                 <span asp-validation-for="EventDate" class="text-danger"></span>
             </div>
 
-            <div class="form-group d-flex justify-content-between align-items-center pt-3" style="border-top: 1px solid var(--light-gray);">
-                <a asp-action="Index" class="btn-minimal" style="border-color: #b2bec3; color: #636e72;">Back to List</a>
-                <input type="submit" value="Create Event" class="btn-cta" style="margin: 0; padding: 0.8rem 2.5rem;" />
+            <div class="form-group form-actions">
+                <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
+                <input type="submit" value="Create Event" class="btn-cta btn-submit" />
             </div>
         </form>
 

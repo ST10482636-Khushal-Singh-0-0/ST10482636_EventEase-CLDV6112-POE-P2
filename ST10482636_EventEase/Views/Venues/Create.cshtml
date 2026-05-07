@@ -6,42 +6,42 @@
 
 <div class="action-header">
     <h1>Create New Venue</h1>
-    <p style="color: #636e72; font-size: 1.1rem;">Add a new premium space to your platform.</p>
+    <p class="action-subtitle">Add a new premium space to your platform.</p>
 </div>
 
-<div class="container" style="max-width: 650px; margin-bottom: 5rem;">
-    <div style="background-color: var(--bg); border: 1px solid var(--light-gray); border-radius: 4px; padding: 3rem; box-shadow: 0 8px 24px rgba(0,0,0,0.04);">
+<div class="container form-card-container">
+    <div class="form-card">
 
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
             <div class="form-group mb-4">
-                <label asp-for="Name" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;"></label>
-                <input asp-for="Name" class="form-control" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px;" placeholder="e.g., The Grand Hall" />
+                <label asp-for="Name" class="control-label custom-label"></label>
+                <input asp-for="Name" class="form-control custom-input" placeholder="e.g., The Grand Hall" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-4">
-                <label asp-for="Location" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;"></label>
-                <input asp-for="Location" class="form-control" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px;" placeholder="e.g., Sandton, Johannesburg" />
+                <label asp-for="Location" class="control-label custom-label"></label>
+                <input asp-for="Location" class="form-control custom-input" placeholder="e.g., Sandton, Johannesburg" />
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-4">
-                <label asp-for="Capacity" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;"></label>
-                <input asp-for="Capacity" class="form-control" style="padding: 0.8rem; border: 1px solid var(--light-gray); border-radius: 3px;" placeholder="e.g., 500" />
+                <label asp-for="Capacity" class="control-label custom-label"></label>
+                <input asp-for="Capacity" class="form-control custom-input" placeholder="e.g., 500" />
                 <span asp-validation-for="Capacity" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-5">
-                <label asp-for="ImageFile" class="control-label" style="font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 0.5rem;">Upload Venue Image</label>
-                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" style="padding: 0.5rem; border: 1px solid var(--light-gray); border-radius: 3px; cursor: pointer;" />
+                <label asp-for="ImageFile" class="control-label custom-label">Upload Venue Image</label>
+                <input asp-for="ImageFile" type="file" class="form-control custom-file-input" accept="image/*" />
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
 
-            <div class="form-group d-flex justify-content-between align-items-center pt-3" style="border-top: 1px solid var(--light-gray);">
-                <a asp-action="Index" class="btn-minimal" style="border-color: #b2bec3; color: #636e72;">Back to List</a>
-                <input type="submit" value="Create Venue" class="btn-cta" style="margin: 0; padding: 0.8rem 2.5rem;" />
+            <div class="form-group form-actions">
+                <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
+                <input type="submit" value="Create Venue" class="btn-cta btn-submit" />
             </div>
         </form>
 

@@ -1,44 +1,46 @@
 ﻿@model ST10482636_EventEase.Models.Booking
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Booking";
 }
 
-<h1>Edit</h1>
+<div class="action-header">
+    <h1>Edit Booking</h1>
+    <p class="action-subtitle">Update reservation details.</p>
+</div>
 
-<h4>Booking</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="container form-card-container">
+    <div class="form-card">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <input type="hidden" asp-for="BookingId" />
-            <div class="form-group">
-                <label asp-for="VenueId" class="control-label"></label>
-                <select asp-for="VenueId" class="form-control" asp-items="ViewBag.VenueId"></select>
-                <span asp-validation-for="VenueId" class="text-danger"></span>
+
+            <div class="form-group mb-4">
+                <label asp-for="VenueId" class="control-label custom-label">Change Venue</label>
+                <select asp-for="VenueId" class="form-control custom-input" asp-items="ViewBag.VenueId" style="cursor: pointer;"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="EventId" class="control-label"></label>
-                <select asp-for="EventId" class="form-control" asp-items="ViewBag.EventId"></select>
-                <span asp-validation-for="EventId" class="text-danger"></span>
+
+            <div class="form-group mb-4">
+                <label asp-for="EventId" class="control-label custom-label">Change Event</label>
+                <select asp-for="EventId" class="form-control custom-input" asp-items="ViewBag.EventId" style="cursor: pointer;"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="BookingDate" class="control-label"></label>
-                <input asp-for="BookingDate" class="form-control" />
+
+            <div class="form-group mb-5">
+                <label asp-for="BookingDate" class="control-label custom-label">Date & Time of Booking</label>
+                <input asp-for="BookingDate" class="form-control custom-input" />
                 <span asp-validation-for="BookingDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="form-group form-actions">
+                <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
+                <input type="submit" value="Save Changes" class="btn-cta btn-submit" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

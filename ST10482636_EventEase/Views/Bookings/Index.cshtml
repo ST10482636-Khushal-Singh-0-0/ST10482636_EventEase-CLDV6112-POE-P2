@@ -21,7 +21,7 @@
     {
         <div class="venue-card">
 
-            <div class="venue-card-img-container" style="height: 160px;">
+            <div class="venue-card-img-container">
                 @if (item.Venue != null && !string.IsNullOrEmpty(item.Venue.ImageUrl))
                 {
                     <img src="@item.Venue.ImageUrl" alt="Venue" class="venue-card-img" />
@@ -44,7 +44,7 @@
                 <div class="venue-card-actions">
                     <a asp-action="Edit" asp-route-id="@item.BookingId" class="btn-card-action">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.BookingId" class="btn-card-action">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.BookingId" class="btn-card-action" style="color: #d63031;">Cancel</a>
+                    <a asp-action="Delete" asp-route-id="@item.BookingId" class="btn-card-action text-danger">Cancel</a>
                 </div>
             </div>
 
