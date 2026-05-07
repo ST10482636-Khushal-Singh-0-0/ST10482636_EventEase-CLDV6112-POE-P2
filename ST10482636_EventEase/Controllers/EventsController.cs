@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ST10482636_EventEase.Data;
 using ST10482636_EventEase.Models;
@@ -20,25 +17,26 @@ namespace ST10482636_EventEase.Controllers
         }
 
         // GET: Events
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Event.ToListAsync());
+            ViewData["CurrentFilter"] = searchString;
+            var events = from e in _context.Event select e;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                events = events.Where(s => s.EventName.Contains(searchString));
+            }
+
+            return View(await events.ToListAsync());
         }
 
         // GET: Events/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var @event = await _context.Event
-                .FirstOrDefaultAsync(m => m.EventId == id);
-            if (@event == null)
-            {
-                return NotFound();
-            }
+            var @event = await _context.Event.FirstOrDefaultAsync(m => m.EventId == id);
+            if (@event == null) return NotFound();
 
             return View(@event);
         }
@@ -50,8 +48,6 @@ namespace ST10482636_EventEase.Controllers
         }
 
         // POST: Events/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EventId,EventName,Description,EventDate")] Event @event)
@@ -68,30 +64,19 @@ namespace ST10482636_EventEase.Controllers
         // GET: Events/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var @event = await _context.Event.FindAsync(id);
-            if (@event == null)
-            {
-                return NotFound();
-            }
+            if (@event == null) return NotFound();
             return View(@event);
         }
 
         // POST: Events/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EventId,EventName,Description,EventDate")] Event @event)
         {
-            if (id != @event.EventId)
-            {
-                return NotFound();
-            }
+            if (id != @event.EventId) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -102,14 +87,8 @@ namespace ST10482636_EventEase.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventExists(@event.EventId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!EventExists(@event.EventId)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -119,17 +98,10 @@ namespace ST10482636_EventEase.Controllers
         // GET: Events/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var @event = await _context.Event
-                .FirstOrDefaultAsync(m => m.EventId == id);
-            if (@event == null)
-            {
-                return NotFound();
-            }
+            var @event = await _context.Event.FirstOrDefaultAsync(m => m.EventId == id);
+            if (@event == null) return NotFound();
 
             return View(@event);
         }
@@ -139,6 +111,12 @@ namespace ST10482636_EventEase.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Booking.Any(b => b.EventId == id))
+            {
+                TempData["ErrorMessage"] = "Cannot delete this event because it is tied to an active booking.";
+                return RedirectToAction(nameof(Delete), new { id = id });
+            }
+
             var @event = await _context.Event.FindAsync(id);
             if (@event != null)
             {
