@@ -5,22 +5,57 @@
 }
 
 <div class="action-header">
-    <h1>Events</h1>
+    <h1>Events Management</h1>
     <p>
         <a asp-action="Create" class="btn-minimal">Create New Event</a>
     </p>
 
-    <form asp-action="Index" method="get" class="search-container">
-        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="search-input" placeholder="Search by event name..." />
-        <button type="submit" class="btn-minimal">SEARCH</button>
+    <form asp-action="Index" method="get" class="search-container" style="display: flex; flex-direction: column; gap: 15px; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea; margin-top: 20px;">
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; width: 100%;">
+            <div>
+                <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Event Name Keyword</label>
+                <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="search-input" style="width: 100%;" placeholder="Search event titles..." />
+            </div>
+
+            <div>
+                <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Event Category Type</label>
+                <select name="eventTypeId" class="search-input" style="width: 100%;" asp-items="ViewBag.EventTypeId">
+                    <option value="">-- View All Categories --</option>
+                </select>
+            </div>
+
+            <div>
+                <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Assigned Venue Matrix</label>
+                <select name="venueId" class="search-input" style="width: 100%;" asp-items="ViewBag.VenueId">
+                    <option value="">-- View All Locations --</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; width: 100%;">
+            <div>
+                <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Start Date Bound</label>
+                <input type="date" name="startDate" value="@ViewData["StartDate"]" class="search-input" style="width: 100%;" />
+            </div>
+
+            <div>
+                <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">End Date Bound</label>
+                <input type="date" name="endDate" value="@ViewData["EndDate"]" class="search-input" style="width: 100%;" />
+            </div>
+            
+            <div style="display: flex; align-items: flex-end; gap: 10px;">
+                <button type="submit" class="btn-minimal" style="flex: 1; height: 42px;">APPLY FILTERS</button>
+                <a asp-action="Index" class="btn-minimal" style="flex: 1; height: 42px; text-align: center; line-height: 42px; background: #6c757d; color:#fff; border-color:#6c757d; text-decoration: none;">RESET</a>
+            </div>
+        </div>
     </form>
 </div>
 
-<div class="venue-grid">
+<div class="venue-grid" style="margin-top: 30px;">
     @foreach (var item in Model)
     {
         <div class="venue-card">
-
             <div class="venue-card-img-container">
                 @if (!string.IsNullOrEmpty(item.ImageUrl))
                 {
@@ -28,7 +63,7 @@
                 }
                 else
                 {
-                    <span class="venue-no-img">No Image Uploaded</span>
+                    <span class="venue-no-img">No Graphic Banner Associated</span>
                 }
             </div>
 
@@ -36,8 +71,9 @@
                 <h3 class="venue-card-title">@item.EventName</h3>
 
                 <div class="venue-card-details">
-                    <strong>Date:</strong> @item.EventDate.ToString("MMMM dd, yyyy") <br />
-                    <strong>Description:</strong> @item.Description
+                    <strong>Classification Type:</strong> @(item.EventType?.TypeName ?? "General Unclassified") <br />
+                    <strong>Target Calendar Date:</strong> @item.EventDate.ToString("MMMM dd, yyyy") <br />
+                    <strong>Information Summary:</strong> @item.Description
                 </div>
 
                 <div class="venue-card-actions">
@@ -46,7 +82,6 @@
                     <a asp-action="Delete" asp-route-id="@item.EventId" class="btn-card-action">Delete</a>
                 </div>
             </div>
-
         </div>
     }
 </div>
