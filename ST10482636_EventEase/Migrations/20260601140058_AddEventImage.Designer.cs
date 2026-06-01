@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ST10482636_EventEase.Data;
 
@@ -11,9 +12,11 @@ using ST10482636_EventEase.Data;
 namespace ST10482636_EventEase.Migrations
 {
     [DbContext(typeof(ST10482636_EventEaseContext))]
-    partial class ST10482636_EventEaseContextModelSnapshot : ModelSnapshot
+    [Migration("20260601140058_AddEventImage")]
+    partial class AddEventImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -22,7 +22,6 @@ namespace ST10482636_EventEase.Controllers
             _blobServiceClient = blobServiceClient;
         }
 
-        // GET: Venues
         public async Task<IActionResult> Index(string searchString)
         {
             ViewData["CurrentFilter"] = searchString;
@@ -36,7 +35,6 @@ namespace ST10482636_EventEase.Controllers
             return View(await venues.ToListAsync());
         }
 
-        // GET: Venues/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -47,13 +45,11 @@ namespace ST10482636_EventEase.Controllers
             return View(venue);
         }
 
-        // GET: Venues/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Venues/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VenueId,Name,Location,Capacity,ImageFile")] Venue venue)
@@ -77,12 +73,13 @@ namespace ST10482636_EventEase.Controllers
 
                 _context.Add(venue);
                 await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Venue created successfully.";
                 return RedirectToAction(nameof(Index));
             }
             return View(venue);
         }
 
-        // GET: Venues/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -92,7 +89,6 @@ namespace ST10482636_EventEase.Controllers
             return View(venue);
         }
 
-        // POST: Venues/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("VenueId,Name,Location,Capacity,ImageUrl,ImageFile")] Venue venue)
@@ -120,6 +116,8 @@ namespace ST10482636_EventEase.Controllers
 
                     _context.Update(venue);
                     await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Venue updated successfully.";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -131,7 +129,6 @@ namespace ST10482636_EventEase.Controllers
             return View(venue);
         }
 
-        // GET: Venues/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -142,7 +139,6 @@ namespace ST10482636_EventEase.Controllers
             return View(venue);
         }
 
-        // POST: Venues/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -160,6 +156,8 @@ namespace ST10482636_EventEase.Controllers
             }
 
             await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Venue deleted successfully.";
             return RedirectToAction(nameof(Index));
         }
 

@@ -4,26 +4,39 @@
     ViewData["Title"] = "Event Details";
 }
 
-<div class="action-header">
-    <h1>Event Details</h1>
-    <p class="action-subtitle">Review the scheduled event information.</p>
-</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0" style="border-radius: 12px; overflow: hidden;">
+                
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.EventName" style="max-height: 400px; object-fit: cover; width: 100%;" />
+                }
+                else
+                {
+                    <div class="bg-light d-flex justify-content-center align-items-center" style="height: 200px;">
+                        <span class="text-muted">No banner uploaded for this event.</span>
+                    </div>
+                }
 
-<div class="container form-card-container">
-    <div class="form-card">
-        <h3 class="card-title-display">@Model.EventName</h3>
+                <div class="card-body p-5">
+                    <h1 class="card-title mb-4" style="font-weight: 700;">@Html.DisplayFor(model => model.EventName)</h1>
+                    
+                    <h5 class="text-muted mb-2">Event Date</h5>
+                    <p class="fs-5 mb-4"><i class="bi bi-calendar3"></i> @Model.EventDate.ToString("dddd, MMMM dd, yyyy")</p>
 
-        <dl class="row dl-layout">
-            <dt class="col-sm-4 dt-label">Date & Time</dt>
-            <dd class="col-sm-8">@Model.EventDate.ToString("dd MMM yyyy, HH:mm")</dd>
-
-            <dt class="col-sm-4 dt-label">Description</dt>
-            <dd class="col-sm-8">@Model.Description</dd>
-        </dl>
-
-        <div class="form-actions">
-            <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
-            <a asp-action="Edit" asp-route-id="@Model.EventId" class="btn-cta btn-submit">Edit Event</a>
+                    <h5 class="text-muted mb-2">Description</h5>
+                    <p class="card-text fs-6 lh-lg mb-4">
+                        @Html.DisplayFor(model => model.Description)
+                    </p>
+                </div>
+                
+                <div class="card-footer bg-white border-top-0 p-4 text-center">
+                    <a asp-action="Edit" asp-route-id="@Model?.EventId" class="btn btn-primary px-4 me-2">Edit Event</a>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">Back to List</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

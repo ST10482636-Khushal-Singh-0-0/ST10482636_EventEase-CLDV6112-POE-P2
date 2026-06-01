@@ -17,7 +17,6 @@ namespace ST10482636_EventEase.Controllers
             _context = context;
         }
 
-        // GET: Bookings
         public async Task<IActionResult> Index(string searchString)
         {
             ViewData["CurrentFilter"] = searchString;
@@ -27,7 +26,6 @@ namespace ST10482636_EventEase.Controllers
                 .Include(b => b.Venue)
                 .AsQueryable();
 
-            // If the user typed something, search by Booking ID OR Event Name
             if (!string.IsNullOrEmpty(searchString))
             {
                 bookings = bookings.Where(b =>
@@ -38,7 +36,6 @@ namespace ST10482636_EventEase.Controllers
             return View(await bookings.ToListAsync());
         }
 
-        // GET: Bookings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -53,7 +50,6 @@ namespace ST10482636_EventEase.Controllers
             return View(booking);
         }
 
-        // GET: Bookings/Create
         public IActionResult Create()
         {
             ViewData["EventId"] = new SelectList(_context.Set<Event>(), "EventId", "EventName");
@@ -61,7 +57,6 @@ namespace ST10482636_EventEase.Controllers
             return View();
         }
 
-        // POST: Bookings/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BookingId,VenueId,EventId,BookingDate")] Booking booking)
@@ -79,6 +74,8 @@ namespace ST10482636_EventEase.Controllers
             {
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Booking created successfully.";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -87,7 +84,6 @@ namespace ST10482636_EventEase.Controllers
             return View(booking);
         }
 
-        // GET: Bookings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -100,7 +96,6 @@ namespace ST10482636_EventEase.Controllers
             return View(booking);
         }
 
-        // POST: Bookings/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BookingId,VenueId,EventId,BookingDate")] Booking booking)
@@ -123,6 +118,8 @@ namespace ST10482636_EventEase.Controllers
                 {
                     _context.Update(booking);
                     await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Booking updated successfully.";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -137,7 +134,6 @@ namespace ST10482636_EventEase.Controllers
             return View(booking);
         }
 
-        // GET: Bookings/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -152,7 +148,6 @@ namespace ST10482636_EventEase.Controllers
             return View(booking);
         }
 
-        // POST: Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -164,6 +159,8 @@ namespace ST10482636_EventEase.Controllers
             }
 
             await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Booking deleted successfully.";
             return RedirectToAction(nameof(Index));
         }
 

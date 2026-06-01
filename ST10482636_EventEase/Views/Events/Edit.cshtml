@@ -33,6 +33,14 @@
                 <span asp-validation-for="EventDate" class="text-danger"></span>
             </div>
 
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="mb-3">
+                    <p>Current Banner:</p>
+                    <img src="@Model.ImageUrl" style="max-width: 200px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);" />
+                </div>
+            }
+
             <div class="form-group form-actions">
                 <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
                 <input type="submit" value="Save Changes" class="btn-cta btn-submit" />
