@@ -6,7 +6,7 @@
 
 <div class="action-header">
     <h1>Create New Event</h1>
-    <p class="action-subtitle">Fill in the details below to schedule your next event.</p>
+    <p class="action-subtitle">Fill in the details below to schedule and classify your next event.</p>
 </div>
 
 <div class="container form-card-container">
@@ -16,20 +16,28 @@
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
             <div class="form-group mb-4">
-                <label asp-for="EventName" class="control-label custom-label"></label>
+                <label asp-for="EventName" class="control-label custom-label">Event Title</label>
                 <input asp-for="EventName" class="form-control custom-input" placeholder="e.g., Summer Music Festival" />
                 <span asp-validation-for="EventName" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-4">
-                <label asp-for="Description" class="control-label custom-label"></label>
+                <label asp-for="EventTypeId" class="control-label custom-label">Event Category Type</label>
+                <select asp-for="EventTypeId" class="form-control custom-input" asp-items="ViewBag.EventTypeId">
+                    <option value="">-- Select a Category --</option>
+                </select>
+                <span asp-validation-for="EventTypeId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Description" class="control-label custom-label">Description</label>
                 <textarea asp-for="Description" class="form-control custom-input" rows="3" placeholder="Describe what the event is about..."></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-4">
-                <label asp-for="EventDate" class="control-label custom-label"></label>
-                <input asp-for="EventDate" class="form-control custom-input" />
+                <label asp-for="EventDate" class="control-label custom-label">Scheduled Date</label>
+                <input asp-for="EventDate" class="form-control custom-input" type="date" />
                 <span asp-validation-for="EventDate" class="text-danger"></span>
             </div>
 
@@ -40,7 +48,7 @@
             </div>
 
             <div class="form-group form-actions">
-                <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
+                <a asp-action="Index" class="btn-minimal btn-back" style="text-decoration: none; line-height: 40px; text-align: center;">Back to List</a>
                 <input type="submit" value="Create Event" class="btn-cta btn-submit" />
             </div>
         </form>
