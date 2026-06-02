@@ -12,10 +12,19 @@ namespace ST10482636_EventEase
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Fetch Database Connection String securely
+            // FLEXIBLE DATABASE CONFIGURATION: Checks Connection Strings, App Settings, and Environment Variables
+            string? dbConnectionString = builder.Configuration.GetConnectionString("ST10482636_EventEaseContext")
+                                      ?? builder.Configuration["ST10482636_EventEaseContext"]
+                                      ?? builder.Configuration["ConnectionStrings:ST10482636_EventEaseContext"]
+                                      ?? builder.Configuration["ConnectionStrings__ST10482636_EventEaseContext"];
+
+            if (string.IsNullOrEmpty(dbConnectionString))
+            {
+                throw new InvalidOperationException("Database Connection String 'ST10482636_EventEaseContext' cannot be located.");
+            }
+
             builder.Services.AddDbContext<ST10482636_EventEaseContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("ST10482636_EventEaseContext")
-                ?? throw new InvalidOperationException("Connection string 'ST10482636_EventEaseContext' not found.")));
+                options.UseSqlServer(dbConnectionString));
 
             // FLEXIBLE BLOB STORAGE CONFIGURATION: Checks App Settings, Environment Variables, and Connection Strings
             string? storageConnectionString = builder.Configuration["AzureStorage:ConnectionString"]
