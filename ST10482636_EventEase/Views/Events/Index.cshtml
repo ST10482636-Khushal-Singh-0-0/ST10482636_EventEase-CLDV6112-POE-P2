@@ -10,24 +10,24 @@
         <a asp-action="Create" class="btn-minimal">Create New Event</a>
     </p>
 
-    <form asp-action="Index" method="get" class="search-container" style="display: flex; flex-direction: column; gap: 15px; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea; margin-top: 20px;">
+    <form asp-action="Index" method="get" class="search-container" style="display: flex; flex-direction: column; gap: 15px; background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea; margin-top: 20px; box-sizing: border-box;">
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; width: 100%;">
             <div>
                 <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Event Name Keyword</label>
-                <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="search-input" style="width: 100%;" placeholder="Search event titles..." />
+                <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box;" placeholder="Search event titles..." />
             </div>
 
             <div>
                 <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Event Category Type</label>
-                <select name="eventTypeId" class="search-input" style="width: 100%;" asp-items="ViewBag.EventTypeId">
+                <select name="eventTypeId" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box; padding: 0 10px;" asp-items="ViewBag.EventTypeId">
                     <option value="">-- View All Categories --</option>
                 </select>
             </div>
 
             <div>
                 <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Assigned Venue Matrix</label>
-                <select name="venueId" class="search-input" style="width: 100%;" asp-items="ViewBag.VenueId">
+                <select name="venueId" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box; padding: 0 10px;" asp-items="ViewBag.VenueId">
                     <option value="">-- View All Locations --</option>
                 </select>
             </div>
@@ -36,17 +36,24 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; width: 100%;">
             <div>
                 <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Start Date Bound</label>
-                <input type="date" name="startDate" value="@ViewData["StartDate"]" class="search-input" style="width: 100%;" />
+                <input type="date" name="startDate" value="@ViewData["StartDate"]" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box;" />
             </div>
 
             <div>
                 <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">End Date Bound</label>
-                <input type="date" name="endDate" value="@ViewData["EndDate"]" class="search-input" style="width: 100%;" />
+                <input type="date" name="endDate" value="@ViewData["EndDate"]" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box;" />
             </div>
             
-            <div style="display: flex; align-items: flex-end; gap: 10px;">
-                <button type="submit" class="btn-minimal" style="flex: 1; height: 42px;">APPLY FILTERS</button>
-                <a asp-action="Index" class="btn-minimal" style="flex: 1; height: 42px; text-align: center; line-height: 42px; background: #6c757d; color:#fff; border-color:#6c757d; text-decoration: none;">RESET</a>
+            <div>
+                <label style="visibility: hidden; display: block; margin-bottom: 5px; font-size: 0.85em;">Alignment Spacer</label>
+                <div style="display: flex; gap: 10px; height: 40px; width: 100%;">
+                    <button type="submit" class="btn-minimal" style="flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0; margin: 0; box-sizing: border-box;">
+                        APPLY FILTERS
+                    </button>
+                    <a asp-action="Index" class="btn-minimal" style="flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; background: #6c757d; color:#fff; border-color:#6c757d; text-decoration: none; padding: 0; margin: 0; box-sizing: border-box;">
+                        RESET
+                    </a>
+                </div>
             </div>
         </div>
     </form>
