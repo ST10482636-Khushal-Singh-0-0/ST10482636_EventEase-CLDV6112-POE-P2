@@ -5,37 +5,58 @@
 }
 
 <div class="action-header">
-    <h1>Edit Booking</h1>
-    <p class="action-subtitle">Update reservation details.</p>
+    <h1>Modify Booking Details</h1>
+    <p class="action-subtitle">Update reservation parameters or replace schedule banner graphics.</p>
 </div>
 
 <div class="container form-card-container">
     <div class="form-card">
-        <form asp-action="Edit">
+
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <input type="hidden" asp-for="BookingId" />
+            <input type="hidden" asp-for="ImageUrl" />
 
             <div class="form-group mb-4">
-                <label asp-for="VenueId" class="control-label custom-label">Change Venue</label>
-                <select asp-for="VenueId" class="form-control custom-input" asp-items="ViewBag.VenueId" style="cursor: pointer;"></select>
+                <label asp-for="EventId" class="control-label custom-label">Select Target Event</label>
+                <select asp-for="EventId" class="form-control custom-input" asp-items="ViewBag.EventId"></select>
+                <span asp-validation-for="EventId" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-4">
-                <label asp-for="EventId" class="control-label custom-label">Change Event</label>
-                <select asp-for="EventId" class="form-control custom-input" asp-items="ViewBag.EventId" style="cursor: pointer;"></select>
+                <label asp-for="VenueId" class="control-label custom-label">Select Destination Venue Space</label>
+                <select asp-for="VenueId" class="form-control custom-input" asp-items="ViewBag.VenueId"></select>
+                <span asp-validation-for="VenueId" class="text-danger"></span>
             </div>
 
-            <div class="form-group mb-5">
-                <label asp-for="BookingDate" class="control-label custom-label">Date & Time of Booking</label>
-                <input asp-for="BookingDate" class="form-control custom-input" />
+            <div class="form-group mb-4">
+                <label asp-for="BookingDate" class="control-label custom-label">Target Calendar Allocation Date</label>
+                <input asp-for="BookingDate" class="form-control custom-input" type="date" />
                 <span asp-validation-for="BookingDate" class="text-danger"></span>
             </div>
 
+            @if (!string.IsNullOrEmpty(Model?.ImageUrl))
+            {
+                <div class="mb-4">
+                    <label class="custom-label">Current Active Booking Banner</label>
+                    <div class="mt-2">
+                        <img src="@Model.ImageUrl" style="max-width: 200px; border-radius: 6px; border: 1px solid #eaeaea;" />
+                    </div>
+                </div>
+            }
+
+            <div class="form-group mb-5">
+                <label asp-for="ImageFile" class="control-label custom-label">Replace Booking Banner Image (Optional)</label>
+                <input asp-for="ImageFile" type="file" class="form-control custom-input" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
             <div class="form-group form-actions">
-                <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
+                <a asp-action="Index" class="btn-minimal btn-back" style="text-decoration: none; line-height: 40px; text-align: center;">Cancel</a>
                 <input type="submit" value="Save Changes" class="btn-cta btn-submit" />
             </div>
         </form>
+
     </div>
 </div>
 
