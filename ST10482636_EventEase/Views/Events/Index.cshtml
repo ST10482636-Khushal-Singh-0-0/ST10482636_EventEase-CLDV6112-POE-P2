@@ -20,14 +20,14 @@
 
             <div>
                 <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Event Category Type</label>
-                <select name="eventTypeId" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box; padding: 0 10px;" asp-items="ViewBag.EventTypeId">
+                <select name="eventTypeId" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box; padding: 0 10px;" asp-items="ViewBag.EventTypesList">
                     <option value="">-- View All Categories --</option>
                 </select>
             </div>
 
             <div>
                 <label style="font-weight: 600; display: block; margin-bottom: 5px; font-size: 0.85em;">Assigned Venue Matrix</label>
-                <select name="venueId" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box; padding: 0 10px;" asp-items="ViewBag.VenueId">
+                <select name="venueId" class="search-input" style="width: 100%; height: 40px; box-sizing: border-box; padding: 0 10px;" asp-items="ViewBag.VenueList">
                     <option value="">-- View All Locations --</option>
                 </select>
             </div>

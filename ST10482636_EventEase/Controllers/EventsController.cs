@@ -26,32 +26,32 @@ namespace ST10482636_EventEase.Controllers
         // GET: Events with Advanced Filtering
         public async Task<IActionResult> Index(string searchString, int? eventTypeId, DateTime? startDate, DateTime? endDate, int? venueId)
         {
-            // Keep filter inputs tracked in the UI view state
+            // Retain parameter choices inside the view state memory arrays
             ViewData["CurrentFilter"] = searchString;
             ViewData["SelectedEventType"] = eventTypeId;
             ViewData["StartDate"] = startDate?.ToString("yyyy-MM-dd");
             ViewData["EndDate"] = endDate?.ToString("yyyy-MM-dd");
             ViewData["SelectedVenue"] = venueId;
 
-            // Load values for the Advanced Filter drop-downs
-            ViewData["EventTypeId"] = new SelectList(await _context.EventType.ToListAsync(), "EventTypeId", "TypeName", eventTypeId);
-            ViewData["VenueId"] = new SelectList(await _context.Venue.ToListAsync(), "VenueId", "Name", venueId);
+            // Distinct List Mapping tags to fully bypass internal MVC Model-Binding conflicts
+            ViewData["EventTypesList"] = new SelectList(await _context.EventType.ToListAsync(), "EventTypeId", "TypeName", eventTypeId);
+            ViewData["VenueList"] = new SelectList(await _context.Venue.ToListAsync(), "VenueId", "Name", venueId);
 
             var query = _context.Event.Include(e => e.EventType).AsQueryable();
 
-            // Filter 1: Text Search
+            // Filter 1: Text Title/Description Keyword Checks
             if (!string.IsNullOrEmpty(searchString))
             {
                 query = query.Where(s => s.EventName.Contains(searchString) || s.Description.Contains(searchString));
             }
 
-            // Filter 2: Event Type Lookup Category Selection
+            // Filter 2: Categorization Type Lookup Matches
             if (eventTypeId.HasValue)
             {
                 query = query.Where(e => e.EventTypeId == eventTypeId);
             }
 
-            // Filter 3: Date Range Criteria
+            // Filter 3: Temporal Range Constraint Checking Boundaries
             if (startDate.HasValue)
             {
                 query = query.Where(e => e.EventDate >= startDate.Value);
@@ -61,16 +61,10 @@ namespace ST10482636_EventEase.Controllers
                 query = query.Where(e => e.EventDate <= endDate.Value);
             }
 
-            // Filter 4: Venue Allocation Availability Checking
+            // Filter 4: Assigned Venue Allocation Matrix (Optimized database server level validation)
             if (venueId.HasValue)
             {
-                // Isolate all active event allocations currently mapped to that venue
-                var activeBookingEventIds = await _context.Booking
-                    .Where(b => b.VenueId == venueId)
-                    .Select(b => b.EventId)
-                    .ToListAsync();
-
-                query = query.Where(e => activeBookingEventIds.Contains(e.EventId));
+                query = query.Where(e => _context.Booking.Any(b => b.VenueId == venueId && b.EventId == e.EventId));
             }
 
             return View(await query.ToListAsync());
@@ -127,7 +121,7 @@ namespace ST10482636_EventEase.Controllers
                 }
                 catch (Exception)
                 {
-                    TempData["ErrorMessage"] = "An error occurred during event initialization.";
+                    TempData["ErrorMessage"] = "Error executing asset attachment operations.";
                 }
             }
             ViewData["EventTypeId"] = new SelectList(await _context.EventType.ToListAsync(), "EventTypeId", "TypeName", @event.EventTypeId);
@@ -207,7 +201,7 @@ namespace ST10482636_EventEase.Controllers
         {
             if (_context.Booking.Any(b => b.EventId == id))
             {
-                TempData["ErrorMessage"] = "Cannot delete this event entity as it is actively assigned to an existing schedule booking entry.";
+                TempData["ErrorMessage"] = "Cannot delete this event as it is assigned to an existing booking schedule constraint entry.";
                 return RedirectToAction(nameof(Delete), new { id = id });
             }
 

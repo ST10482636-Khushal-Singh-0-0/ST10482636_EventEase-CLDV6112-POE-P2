@@ -1,38 +1,50 @@
 ﻿@model ST10482636_EventEase.Models.Booking
 
 @{
-    ViewData["Title"] = "Make a Booking";
+    ViewData["Title"] = "Create Booking";
 }
 
 <div class="action-header">
-    <h1>Make a Booking</h1>
-    <p class="action-subtitle">Secure a premium venue for your upcoming event.</p>
+    <h1>Create Space Booking</h1>
+    <p class="action-subtitle">Link scheduled events with physical venue allocation boards safely.</p>
 </div>
 
 <div class="container form-card-container">
     <div class="form-card">
 
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
             <div class="form-group mb-4">
-                <label asp-for="VenueId" class="control-label custom-label">Select Venue</label>
-                <select asp-for="VenueId" class="form-control custom-input" asp-items="ViewBag.VenueId" style="cursor: pointer;"></select>
+                <label asp-for="EventId" class="control-label custom-label">Select Target Event</label>
+                <select asp-for="EventId" class="form-control custom-input" asp-items="ViewBag.EventId">
+                    <option value="">-- Choose Event Reference --</option>
+                </select>
+                <span asp-validation-for="EventId" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-4">
-                <label asp-for="EventId" class="control-label custom-label">Select Event</label>
-                <select asp-for="EventId" class="form-control custom-input" asp-items="ViewBag.EventId" style="cursor: pointer;"></select>
+                <label asp-for="VenueId" class="control-label custom-label">Select Destination Venue Space</label>
+                <select asp-for="VenueId" class="form-control custom-input" asp-items="ViewBag.VenueId">
+                    <option value="">-- Choose Physical Location --</option>
+                </select>
+                <span asp-validation-for="VenueId" class="text-danger"></span>
             </div>
 
-            <div class="form-group mb-5">
-                <label asp-for="BookingDate" class="control-label custom-label">Date & Time of Booking</label>
-                <input asp-for="BookingDate" class="form-control custom-input" />
+            <div class="form-group mb-4">
+                <label asp-for="BookingDate" class="control-label custom-label">Target Calendar Allocation Date</label>
+                <input asp-for="BookingDate" class="form-control custom-input" type="date" />
                 <span asp-validation-for="BookingDate" class="text-danger"></span>
             </div>
 
+            <div class="form-group mb-5">
+                <label asp-for="ImageFile" class="control-label custom-label">Booking Schedule Banner Graphics</label>
+                <input asp-for="ImageFile" type="file" class="form-control custom-input" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
             <div class="form-group form-actions">
-                <a asp-action="Index" class="btn-minimal btn-back">Back to List</a>
+                <a asp-action="Index" class="btn-minimal btn-back" style="text-decoration: none; line-height: 40px; text-align: center;">Back to List</a>
                 <input type="submit" value="Confirm Booking" class="btn-cta btn-submit" />
             </div>
         </form>

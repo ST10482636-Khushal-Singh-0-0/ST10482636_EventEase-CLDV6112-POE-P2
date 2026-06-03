@@ -13,13 +13,13 @@ namespace ST10482636_EventEase.Data
         public DbSet<Venue> Venue { get; set; } = default!;
         public DbSet<Event> Event { get; set; } = default!;
         public DbSet<Booking> Booking { get; set; } = default!;
-        public DbSet<EventType> EventType { get; set; } = default!; // Lookup Table
+        public DbSet<EventType> EventType { get; set; } = default!; // Advanced Categories Lookup
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Predefine Categories into the Lookup Table
+            // Predefine Seed Categories into the Live Cloud Database
             modelBuilder.Entity<EventType>().HasData(
                 new EventType { EventTypeId = 1, TypeName = "Concert/Music Festival" },
                 new EventType { EventTypeId = 2, TypeName = "Conference/Corporate" },

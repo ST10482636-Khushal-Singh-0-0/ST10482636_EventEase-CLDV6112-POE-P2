@@ -1,53 +1,45 @@
 ﻿@model IEnumerable<ST10482636_EventEase.Models.Booking>
 
 @{
-    ViewData["Title"] = "Bookings Dashboard";
+    ViewData["Title"] = "Bookings";
 }
 
 <div class="action-header">
-    <h1>Venue Bookings</h1>
+    <h1>Reservations Matrix</h1>
     <p>
-        <a asp-action="Create" class="btn-minimal">Make New Booking</a>
+        <a asp-action="Create" class="btn-minimal">Create New Booking Entry</a>
     </p>
-
-    <form asp-action="Index" method="get" class="search-container">
-        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="search-input" placeholder="Search by venue or event name..." />
-        <button type="submit" class="btn-minimal">SEARCH</button>
-    </form>
 </div>
 
-<div class="venue-grid">
+<div class="venue-grid" style="margin-top: 30px;">
     @foreach (var item in Model)
     {
         <div class="venue-card">
-
             <div class="venue-card-img-container">
-                @if (item.Venue != null && !string.IsNullOrEmpty(item.Venue.ImageUrl))
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
                 {
-                    <img src="@item.Venue.ImageUrl" alt="Venue" class="venue-card-img" />
+                    <img src="@item.ImageUrl" alt="Booking Banner" class="venue-card-img" />
                 }
                 else
                 {
-                    <span class="venue-no-img">Booking Details</span>
+                    <span class="venue-no-img">No Schedule Banner Associated</span>
                 }
             </div>
 
             <div class="venue-card-body">
-                <h3 class="venue-card-title">@(item.Event != null ? item.Event.EventName : "N/A")</h3>
+                <h3 class="venue-card-title">@(item.Event?.EventName ?? "Unassigned Event Context")</h3>
 
                 <div class="venue-card-details">
-                    <strong>When:</strong> @item.BookingDate.ToString("dd MMM yyyy, HH:mm") <br />
-                    <strong>Where:</strong> @(item.Venue != null ? item.Venue.Name : "N/A") <br />
-                    <strong>Location:</strong> @(item.Venue != null ? item.Venue.Location : "N/A")
+                    <strong>Allocated Location Space:</strong> @(item.Venue?.Name ?? "Unassigned Spatial Location") <br />
+                    <strong>Schedule Execution Date:</strong> @item.BookingDate.ToString("MMMM dd, yyyy")
                 </div>
 
                 <div class="venue-card-actions">
                     <a asp-action="Edit" asp-route-id="@item.BookingId" class="btn-card-action">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.BookingId" class="btn-card-action">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.BookingId" class="btn-card-action text-danger">Cancel</a>
+                    <a asp-action="Delete" asp-route-id="@item.BookingId" class="btn-card-action">Delete</a>
                 </div>
             </div>
-
         </div>
     }
 </div>

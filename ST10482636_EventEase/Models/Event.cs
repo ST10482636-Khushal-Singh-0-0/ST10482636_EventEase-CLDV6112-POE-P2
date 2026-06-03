@@ -25,7 +25,7 @@ namespace ST10482636_EventEase.Models
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
 
-        // Foreign Key lookup for Advanced Filtering
+        // Structural Lookup Relations for Part 3 Advanced Filtering
         [Display(Name = "Event Type")]
         public int? EventTypeId { get; set; }
         public EventType? EventType { get; set; }
