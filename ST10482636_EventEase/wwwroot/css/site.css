@@ -599,3 +599,62 @@ header {
     text-align: center;
     margin-top: 3.5rem;
 }
+
+/* ==========================================
+   MOBILE RESPONSIVENESS OVERRIDES
+   ========================================== */
+
+@media (max-width: 768px) {
+    /* 1. Force your custom card grids into a single stacking column */
+    .venue-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        padding: 10px !important;
+    }
+
+    /* 2. Scale down heavy headers so they fit without breaking lines awkwardly */
+    .action-header {
+        text-align: center;
+        padding: 15px 10px !important;
+    }
+
+        .action-header h1 {
+            font-size: 1.8rem !important;
+        }
+
+    /* 3. Make form containers expand comfortably to the screen edges */
+    .form-card-container {
+        padding: 10px !important;
+    }
+
+    .form-card {
+        padding: 20px 15px !important;
+        border-radius: 6px !important;
+    }
+
+    /* 4. Ensure action buttons span wide enough to tap easily on touchscreens */
+    .venue-card-actions {
+        flex-direction: column;
+        gap: 8px !important;
+    }
+
+    .btn-card-action {
+        width: 100%;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    /* 5. Clean up your global navigation bar on mobile devices */
+    .navbar .container-fluid {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar-nav {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}

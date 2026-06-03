@@ -4,6 +4,35 @@
     ViewData["Title"] = "Events";
 }
 
+<style>
+    /* Desktop style rule: show block display */
+    .desktop-only-spacer {
+        display: block;
+        visibility: hidden;
+        margin-bottom: 5px;
+        font-size: 0.85em;
+    }
+
+    /* Mobile override style rule: strip spacer height away when on small viewports */
+    @media (max-width: 768px) {
+        .desktop-only-spacer {
+            display: none !important;
+        }
+        
+        .responsive-btn-row {
+            flex-direction: column;
+            height: auto !important;
+            gap: 10px !important;
+        }
+
+            .responsive-btn-row button,
+            .responsive-btn-row a {
+                height: 40px !important;
+                width: 100% !important;
+            }
+    }
+</style>
+
 <div class="action-header">
     <h1>Events Management</h1>
     <p>
@@ -45,8 +74,8 @@
             </div>
             
             <div>
-                <label style="visibility: hidden; display: block; margin-bottom: 5px; font-size: 0.85em;">Alignment Spacer</label>
-                <div style="display: flex; gap: 10px; height: 40px; width: 100%;">
+                <label class="desktop-only-spacer">Alignment Spacer</label>
+                <div class="responsive-btn-row" style="display: flex; gap: 10px; height: 40px; width: 100%;">
                     <button type="submit" class="btn-minimal" style="flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0; margin: 0; box-sizing: border-box;">
                         APPLY FILTERS
                     </button>
